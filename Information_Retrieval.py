@@ -20,13 +20,13 @@ def resize_image(image, size=(150, 150)):
 def get_histogram(image):
     rgb_histogram = []
     for channel_id in range(3):
-        histogram, _ = np.histogram(image.getdata(band=channel_id), bins=8, range=(0, 255))
+        histogram, _ = np.histogram(image.getdata(band=channel_id), bins=128, range=(0, 255))
         rgb_histogram.append(histogram)
     return tuple(rgb_histogram)
 
 
 def save_histograms(histograms_df):
-    histograms_df.to_csv('Dataset_Histograms.csv')
+    histograms_df.to_pickle('Dataset_Histograms.pkl')
 
 
 def compute_dataset_histograms(path=os.getcwd() + '/Dataset/', img_size=(150, 150)):
@@ -35,15 +35,15 @@ def compute_dataset_histograms(path=os.getcwd() + '/Dataset/', img_size=(150, 15
 
     names = []
     histograms = []
-    for img_name in img_list:
+    for image_name in img_list:
         try:
-            img = get_image(img_name)
+            image = get_image(image_name)
         except IOError:
-            print(f'WARNING: "{img_name}" is not an image!')
+            print(f'WARNING: "{image_name}" is not an image!')
             continue
-        img = resize_image(img, size=img_size)
-        hist = get_histogram(img)
-        names.append(img_name)
+        image = resize_image(image, size=img_size)
+        hist = get_histogram(image)
+        names.append(image_name)
         histograms.append(hist)
 
     df_ = pd.DataFrame({'Image Name': names, 'Histogram': histograms})
@@ -56,11 +56,35 @@ def compute_dataset_histograms(path=os.getcwd() + '/Dataset/', img_size=(150, 15
 
 def load_histograms():
     try:
-        return pd.read_csv('Dataset_Histograms.csv')
+        return pd.read_pickle('Dataset_Histograms.pkl')
     except FileNotFoundError:
         print('Dataset histograms not found\nComputing histograms ...')
         return compute_dataset_histograms()
 
 
-if __name__ == '__main__':
+def compute_distance(rgb_hist1, rgb_hist2):
+    rgb_dist = []
+    for i in range(3):
+        rgb_dist.append(np.linalg.norm(rgb_hist1[i] - rgb_hist2[i]))
+    return np.linalg.norm(rgb_dist)
+
+
+def get_similar(image, quantity=10):
+    image = resize_image(image)
+    input_hist = get_histogram(image)
     df = load_histograms()
+    dist_list = []
+    for i in range(len(df)):
+        dist = compute_distance(input_hist, df['Histogram'][i])
+        dist_list.append([df['Image Name'][i], dist])
+    dist_list.sort(key=lambda x: x[1])
+    return [x[0] for x in dist_list[:quantity]]
+
+
+if __name__ == '__main__':
+    img_path = input('Enter Image Full Path: ')
+    input_img = Image.open(img_path)
+    images = get_similar(input_img)
+    for img_name in images:
+        img = get_image(img_name)
+        img.show()
