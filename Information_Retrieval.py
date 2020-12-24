@@ -38,6 +38,9 @@ class App(tk.Tk):
 
     def run(self):
         self.mainloop()
+def png_converter(im,name):
+    im.save("Dataset/PNG/"+name+".png");
+
 
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):
