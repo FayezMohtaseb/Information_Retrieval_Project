@@ -26,6 +26,16 @@ class App(tk.Tk):
         self.picture_display = tk.Label(self)
         self.picture_display.pack()
 
+    def show_slides(self):
+        '''cycle through the images and show them'''
+        # next works with Python26 or higher
+        img_object, img_name = next(self.pictures)
+        self.picture_display.config(image=img_object)
+        # shows the image filename, but could be expanded
+        # to show an associated description of the image
+        self.title(img_name)
+        self.after(self.delay, self.show_slides)
+
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):
     return os.listdir(path)
