@@ -32,8 +32,10 @@ if messagebox.askyesno('Question'," choose yes if you want to test image retival
         images = IR.get_similar(input_img)
         for img_name in images:
             modified_name = os.path.splitext(img_name)[0]
-
-
+            img = Image.open('Dataset/' + img_name)
+            IR.png_converter(img, modified_name)
+            image_files.append("Dataset/PNG/" + modified_name + ".png")
+        
 # img_path = input('Enter Image Full Path: ')
 # input_img = Image.open(img_path)
 # images = IR.get_similar(input_img)
