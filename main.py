@@ -25,7 +25,7 @@ if messagebox.askyesno('Question'," choose yes if you want to test image retival
     # get a series of gif images you have in the working folder
     # or use full path, or set directory to where the images are
     image_files = []
-    
+    img_path = askopenfilename(filetypes=[("Image File", "*.jpg")])
 
 # img_path = input('Enter Image Full Path: ')
 # input_img = Image.open(img_path)
