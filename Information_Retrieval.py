@@ -13,6 +13,18 @@ except ImportError:
 
 class App(tk.Tk):
     '''Tk window/label adjusts to size of image'''
+    def __init__(self, image_files, x, y, delay):
+        # the root will be self
+        tk.Tk.__init__(self)
+        # set x, y position only
+        self.geometry('+{}+{}'.format(x, y))
+        self.delay = delay
+        # allows repeat cycling through the pictures
+        # store as (img_object, img_name) tuple
+        self.pictures = cycle((tk.PhotoImage(file=image), image)
+                              for image in image_files)
+        self.picture_display = tk.Label(self)
+        self.picture_display.pack()
 
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):
