@@ -36,6 +36,9 @@ class App(tk.Tk):
         self.title(img_name)
         self.after(self.delay, self.show_slides)
 
+    def run(self):
+        self.mainloop()
+
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):
     return os.listdir(path)
