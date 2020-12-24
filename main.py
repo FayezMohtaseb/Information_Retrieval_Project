@@ -44,14 +44,14 @@ if messagebox.askyesno('Question'," choose yes if you want to test image retival
         app = IR.App(image_files, x, y, delay)
         app.show_slides()
         app.run()
-# img_path = input('Enter Image Full Path: ')
-# input_img = Image.open(img_path)
-# images = IR.get_similar(input_img)
-# for img_name in images:
-#     img = IR.get_image(img_name)
-#     img.show()
-#
-#
+
+else:
+    exit(0)
+    window.deiconify()
+    window.destroy()
+    window.quit()
+
+
     
     
     
