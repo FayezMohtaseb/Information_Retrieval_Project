@@ -3,6 +3,16 @@ import numpy as np
 import pandas as pd
 import os
 import time
+from itertools import cycle
+try:
+    # Python2
+    import Tkinter as tk
+except ImportError:
+    # Python3
+    import tkinter as tk
+
+class App(tk.Tk):
+    '''Tk window/label adjusts to size of image'''
 
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):

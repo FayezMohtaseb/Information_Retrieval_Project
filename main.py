@@ -35,7 +35,12 @@ if messagebox.askyesno('Question'," choose yes if you want to test image retival
             img = Image.open('Dataset/' + img_name)
             IR.png_converter(img, modified_name)
             image_files.append("Dataset/PNG/" + modified_name + ".png")
-        
+        root.destroy()
+        # set milliseconds time between slides
+        delay = 3500
+        # upper left corner coordinates of app window
+        x = 100
+        y = 50
 # img_path = input('Enter Image Full Path: ')
 # input_img = Image.open(img_path)
 # images = IR.get_similar(input_img)
