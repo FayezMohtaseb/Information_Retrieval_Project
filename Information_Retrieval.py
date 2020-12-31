@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import time
 from itertools import cycle
+
 try:
     # Python2
     import Tkinter as tk
@@ -11,8 +12,10 @@ except ImportError:
     # Python3
     import tkinter as tk
 
+
 class App(tk.Tk):
-    '''Tk window/label adjusts to size of image'''
+    """Tk window/label adjusts to size of image"""
+
     def __init__(self, image_files, x, y, delay):
         # the root will be self
         tk.Tk.__init__(self)
@@ -27,7 +30,7 @@ class App(tk.Tk):
         self.picture_display.pack()
 
     def show_slides(self):
-        '''cycle through the images and show them'''
+        """cycle through the images and show them"""
         # next works with Python26 or higher
         img_object, img_name = next(self.pictures)
         self.picture_display.config(image=img_object)
@@ -38,9 +41,10 @@ class App(tk.Tk):
 
     def run(self):
         self.mainloop()
-def png_converter(im,name):
-    im.save("Dataset/PNG/"+name+".png");
 
+
+def png_converter(im, name):
+    im.save("Dataset/PNG/" + name + ".png")
 
 
 def load_dataset(path=os.getcwd() + '/Dataset/'):

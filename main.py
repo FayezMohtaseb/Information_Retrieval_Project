@@ -1,9 +1,10 @@
 import Information_Retrieval as IR
 from PIL import Image
 from tkinter.filedialog import askopenfilename
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 from tkinter import messagebox
 import os
+
 try:
     # Python2
     import Tkinter as tk
@@ -11,11 +12,10 @@ except ImportError:
     # Python3
     import tkinter as tk
 
-
-window= tk.Tk()
+window = tk.Tk()
 window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
 window.withdraw()
-if messagebox.askyesno('Question'," choose yes if you want to test image retival program otherise click no")==True:
+if messagebox.askyesno('Question', "Click yes if you want to test image retrieval program, otherwise click no"):
     window.deiconify()
     window.destroy()
     window.quit()
@@ -50,10 +50,3 @@ else:
     window.deiconify()
     window.destroy()
     window.quit()
-
-
-    
-    
-    
-    
-     
