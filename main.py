@@ -1,7 +1,6 @@
 import Information_Retrieval as IR
-from PIL import Image
 from tkinter.filedialog import askopenfilename
-from PIL import Image, ImageTk
+from PIL import Image
 from tkinter import messagebox
 import os
 
